@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Shorts View Switcher",
+  "description": "Switch every YouTube Shorts into a normal YouTube video",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
