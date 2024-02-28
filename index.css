@@ -1,0 +1,28 @@
+html{
+  width: 500px;
+  height: 80px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #202124;
+  color: #E8EAED;
+}
+
+.title{
+  text-align: center;
+  width: 500px;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 2px solid #3C4043;
+  background-color: #171717;
+  color: #E8EAED;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.description{
+  margin-top: 10px;
+  margin-left: 5px;
+}
