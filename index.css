@@ -6,8 +6,8 @@ html{
 body {
   margin: 0;
   padding: 0;
-  background-color: #202124;
-  color: #E8EAED;
+  background-color: #282828;
+  color: #E5EAED;
 }
 
 .title{
@@ -16,9 +16,9 @@ body {
   width: 300px;
   font-size: 20px;
   font-weight: bold;
-  border-bottom: 2px solid #3C4043;
+  border-bottom: 2px solid #E5EAED;
   background-color: #c4302b;
-  color: #282828;
+  color: #E5EAED;
   padding-top: 5px;
   padding-bottom: 5px;
 }
