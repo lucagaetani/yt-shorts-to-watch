@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let [tab] = await chrome.tabs.query(queryOptions);
     if (checkBox.checked && tab.url.includes("youtube.com/shorts")) {
       const newUrl = tab.url.replace("shorts", "watch");
-      chrome.tabs.reload(tab.id);
+      chrome.tabs.update(tab.id, { url: newUrl });
     }
   });
 
