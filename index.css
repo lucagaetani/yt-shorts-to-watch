@@ -10,6 +10,7 @@ body {
   color: #E5EAED;
 }
 
+/* Title div css */
 .title{
   font: roboto;
   text-align: center;
@@ -23,6 +24,7 @@ body {
   padding-bottom: 5px;
 }
 
+/* Description div css */
 .description{
   margin-top: 10px;
   margin-left: 5px;
