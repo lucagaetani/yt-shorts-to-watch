@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Update the state when the checkbox is changed
-  checkBox.addEventListener('change', () => {
+  checkBox.addEventListener('change', async () => {
     chrome.storage.sync.set({ isEnabled: checkBox.checked });
     updateDescription(checkBox.checked);
     let newIconsPath = checkBox.checked ? {
@@ -24,6 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "128" : "../icons/icon128NA.png",
     };
     chrome.action.setIcon({ path: newIconsPath });
+    //If the extension is enabled and the user is watching a YouTube Shorts video, change the url
+    let queryOptions = { active: true, lastFocusedWindow: true };
+    let [tab] = await chrome.tabs.query(queryOptions);
+    if (checkBox.checked && tab.url.includes("youtube.com/shorts")) {
+      const newUrl = tab.url.replace("shorts", "watch");
+      chrome.tabs.reload(tab.id);
+    }
   });
 
   const updateDescription = (isEnabled) => {
