@@ -1,20 +1,61 @@
-chrome.runtime.onInstalled.addListener(() => {
-  //Set the default state when the extension is installed
-  chrome.storage.sync.set({ isEnabled: true });
+const RULESET_ID = "shorts_to_watch";
+
+const ICONS = {
+  enabled: {
+    16: "icons/icon16.png",
+    32: "icons/icon32.png",
+    48: "icons/icon48.png",
+    128: "icons/icon128.png",
+  },
+  disabled: {
+    16: "icons/icon16NA.png",
+    32: "icons/icon32NA.png",
+    48: "icons/icon48NA.png",
+    128: "icons/icon128NA.png",
+  },
+};
+
+function logError(context) {
+  return (error) => console.error(`View Switcher: ${context}`, error);
+}
+
+async function readIsEnabled() {
+  const { isEnabled } = await chrome.storage.sync.get("isEnabled");
+  return isEnabled !== false;
+}
+
+// Neither the enabled ruleset nor the toolbar icon is guaranteed to survive browser
+// restarts and extension updates, so both are re-derived from storage.
+async function applyState(isEnabled) {
+  const rulesetUpdate = isEnabled
+    ? { enableRulesetIds: [RULESET_ID] }
+    : { disableRulesetIds: [RULESET_ID] };
+  await Promise.all([
+    chrome.declarativeNetRequest.updateEnabledRulesets(rulesetUpdate),
+    chrome.action.setIcon({ path: isEnabled ? ICONS.enabled : ICONS.disabled }),
+  ]);
+}
+
+async function syncFromStorage() {
+  await applyState(await readIsEnabled());
+}
+
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  // Only set the default on a fresh install; updates keep the user's choice.
+  const setDefault =
+    reason === chrome.runtime.OnInstalledReason.INSTALL
+      ? chrome.storage.sync.set({ isEnabled: true })
+      : Promise.resolve();
+  setDefault.then(syncFromStorage).catch(logError("could not initialise after install/update"));
 });
 
-//If the extension is reactivated (but not uninstalled), activate it
 chrome.runtime.onStartup.addListener(() => {
-  chrome.storage.sync.set({ isEnabled: true });
+  syncFromStorage().catch(logError("could not restore state on startup"));
 });
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === "complete" && tab.url && tab.url.includes("youtube.com/shorts")) {
-    chrome.storage.sync.get(['isEnabled'], (data) => {
-      if (data.isEnabled) {
-        const newUrl = tab.url.replace("shorts", "watch");
-        chrome.tabs.update(tab.id, { url: newUrl });
-      }
-    });
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName !== "sync" || !("isEnabled" in changes)) {
+    return;
   }
+  applyState(changes.isEnabled.newValue !== false).catch(logError("could not apply new state"));
 });

@@ -1,41 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const checkBox = document.querySelector('input[type="checkbox"]');
-  const description = document.querySelector('.description');
+document.addEventListener("DOMContentLoaded", async () => {
+  const checkBox = document.getElementById("enabled");
+  const description = document.getElementById("status");
 
-  // Load the current state of the checkbox
-  chrome.storage.sync.get(['isEnabled'], (data) => {
-    checkBox.checked = data.isEnabled;
-    updateDescription(checkBox.checked);
-  });
+  const updateDescription = (isEnabled) => {
+    const activatedText = "This extension is currently working. Every YouTube Short opens instantly as a normal YouTube video.";
+    const notActivatedText = "This extension is not currently working. Reactivate it to open every YouTube Shorts as a normal YouTube video.";
+    description.textContent = isEnabled ? activatedText : notActivatedText;
+  };
 
-  // Update the state when the checkbox is changed
-  checkBox.addEventListener('change', async () => {
-    chrome.storage.sync.set({ isEnabled: checkBox.checked });
-    updateDescription(checkBox.checked);
-    let newIconsPath = checkBox.checked ? {
-      "16" : "../icons/icon16.png",
-      "32" : "../icons/icon32.png",
-      "48" : "../icons/icon48.png",
-      "128" : "../icons/icon128.png",
-    } : {
-      "16" : "../icons/icon16NA.png",
-      "32" : "../icons/icon32NA.png",
-      "48" : "../icons/icon48NA.png",
-      "128" : "../icons/icon128NA.png",
-    };
-    chrome.action.setIcon({ path: newIconsPath });
-    //If the extension is enabled and the user is watching a YouTube Shorts video, change the url
-    let queryOptions = { active: true, lastFocusedWindow: true };
-    let [tab] = await chrome.tabs.query(queryOptions);
-    if (checkBox.checked && tab.url.includes("youtube.com/shorts")) {
-      const newUrl = tab.url.replace("shorts", "watch");
-      chrome.tabs.update(tab.id, { url: newUrl });
+  // The service worker and content scripts react to this storage change
+  // (icon, redirect rule, and switching a Short that is already open).
+  checkBox.addEventListener("change", async () => {
+    const isEnabled = checkBox.checked;
+    updateDescription(isEnabled);
+    try {
+      await chrome.storage.sync.set({ isEnabled });
+    } catch (error) {
+      console.error("View Switcher: could not save setting", error);
+      checkBox.checked = !isEnabled;
+      description.textContent = "Your change could not be saved. Please try again.";
     }
   });
 
-  const updateDescription = (isEnabled) => {
-    const activatedText = "This extension is currently working. It will automatically change every YouTube Shorts into a normal YouTube video.";
-    const notActivatedText = "This extension is not currently working. Reactivate it to change every YouTube Shorts into a normal YouTube video.";
-    description.textContent = isEnabled ? activatedText : notActivatedText;
+  try {
+    const { isEnabled } = await chrome.storage.sync.get("isEnabled");
+    checkBox.checked = isEnabled !== false;
+    updateDescription(checkBox.checked);
+    checkBox.disabled = false;
+  } catch (error) {
+    console.error("View Switcher: could not load setting", error);
+    description.textContent = "Your setting could not be loaded. Close and reopen this popup to try again.";
+  } finally {
+    // Force a style flush so the initial state is painted before transitions are re-enabled.
+    void checkBox.offsetWidth;
+    document.body.classList.remove("is-loading");
   }
 });

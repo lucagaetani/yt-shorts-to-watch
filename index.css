@@ -1,6 +1,5 @@
-html{
+html {
   width: 300px;
-  height: 108px;
 }
 
 body {
@@ -8,30 +7,29 @@ body {
   padding: 0;
   background-color: #282828;
   color: #E5EAED;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
 }
 
-/* Title div css */
-.title{
-  font: roboto;
+/* Title css */
+.title {
+  margin: 0;
   text-align: center;
-  width: 300px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   border-bottom: 2px solid #E5EAED;
   background-color: #c4302b;
   color: #E5EAED;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px;
 }
 
-/* Description div css */
-.description{
-  margin-top: 10px;
-  margin-left: 5px;
+/* Description css */
+.description {
+  margin: 10px 5px 0;
 }
 
 /* Switcher div css */
-.switcher{
+.switcher {
   margin-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -54,6 +52,16 @@ body {
   height: 0;
 }
 
+/* Text for screen readers only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* The slider */
 .slider {
   position: absolute;
@@ -62,8 +70,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  border-radius: 34px;
   background-color: grey;
-  -webkit-transition: .4s;
   transition: .4s;
 }
 
@@ -74,8 +82,8 @@ body {
   width: 26px;
   left: 4px;
   bottom: 4px;
+  border-radius: 50%;
   background-color: #E5EAED;
-  -webkit-transition: .4s;
   transition: .4s;
 }
 
@@ -83,12 +91,29 @@ input:checked + .slider {
   background-color: #c4302b;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #c4302b;
+input:focus-visible + .slider {
+  outline: 2px solid #E5EAED;
+  outline-offset: 2px;
+}
+
+input:disabled + .slider {
+  cursor: default;
+  opacity: .5;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+/* Show the saved state without animating from "off" when the popup opens */
+.is-loading .slider,
+.is-loading .slider:before {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider,
+  .slider:before {
+    transition: none;
+  }
 }
