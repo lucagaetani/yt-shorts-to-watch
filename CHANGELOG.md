@@ -7,9 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 - Translations for French, German, Chinese (Simplified), Portuguese (Brazil), Arabic, Dutch,
-  Italian and Polish, using Chrome's `_locales` system. The extension name, description, toolbar
-  tooltip and popup follow the browser's language and fall back to English. The popup is shown
-  right-to-left in Arabic.
+  Italian and Polish, using Chrome's `_locales` system. The description and popup text follow the
+  browser's language and fall back to English. The popup is shown right-to-left in Arabic.
+  The extension name "View Switcher for YouTube Shorts" is never translated.
 
 ### Changed
 - Renamed the extension from "YouTube Shorts View Switcher" to **"View Switcher for YouTube Shorts"**.

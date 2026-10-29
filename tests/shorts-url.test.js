@@ -70,6 +70,9 @@ test("redirect rule avoids counted repetition", () => {
 test("manifest is valid for the Chrome Web Store", () => {
   const manifest = readJson("manifest.json");
   assert.equal(manifest.manifest_version, 3);
+  // The product name is never translated.
+  assert.equal(manifest.name, "View Switcher for YouTube Shorts");
+  assert.equal(manifest.action.default_title, manifest.name);
   assert.ok(fs.existsSync(path.join(root, "_locales", manifest.default_locale, "messages.json")));
 
   const referencedFiles = [
@@ -108,7 +111,6 @@ test("every locale translates every message within Chrome's limits", () => {
     for (const [key, { message }] of Object.entries(messages)) {
       assert.ok(typeof message === "string" && message.trim() !== "", `${locale}.${key} is empty`);
     }
-    assert.ok(messages.extName.message.length <= 75, `${locale} name is too long`);
     assert.ok(messages.extDescription.message.length <= 132, `${locale} description is too long`);
     assert.ok(["ltr", "rtl"].includes(messages.htmlDir.message), `${locale} htmlDir`);
   }
