@@ -70,7 +70,7 @@ test("redirect rule avoids counted repetition", () => {
 test("manifest is valid for the Chrome Web Store", () => {
   const manifest = readJson("manifest.json");
   assert.equal(manifest.manifest_version, 3);
-  assert.ok(manifest.description.length <= 132, `description is ${manifest.description.length} chars`);
+  assert.ok(fs.existsSync(path.join(root, "_locales", manifest.default_locale, "messages.json")));
 
   const referencedFiles = [
     manifest.background.service_worker,
@@ -82,5 +82,34 @@ test("manifest is valid for the Chrome Web Store", () => {
   ];
   for (const file of referencedFiles) {
     assert.ok(fs.existsSync(path.join(root, file)), `missing ${file}`);
+  }
+});
+
+test("every locale translates every message within Chrome's limits", () => {
+  const manifest = readJson("manifest.json");
+  const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  const popupScript = fs.readFileSync(path.join(root, "index.js"), "utf8");
+
+  const referencedKeys = new Set([
+    ...[...JSON.stringify(manifest).matchAll(/__MSG_(\w+)__/g)].map((match) => match[1]),
+    ...[...html.matchAll(/data-i18n="(\w+)"/g)].map((match) => match[1]),
+    ...[...popupScript.matchAll(/\bt\("(\w+)"\)/g)].map((match) => match[1]),
+  ]);
+  const defaultKeys = Object.keys(readJson(`_locales/${manifest.default_locale}/messages.json`)).sort();
+  for (const key of referencedKeys) {
+    assert.ok(defaultKeys.includes(key), `message "${key}" is used but not defined`);
+  }
+
+  const locales = fs.readdirSync(path.join(root, "_locales"));
+  assert.deepEqual(locales.sort(), ["ar", "de", "en", "fr", "it", "nl", "pl", "pt_BR", "zh_CN"]);
+  for (const locale of locales) {
+    const messages = readJson(`_locales/${locale}/messages.json`);
+    assert.deepEqual(Object.keys(messages).sort(), defaultKeys, `${locale} keys`);
+    for (const [key, { message }] of Object.entries(messages)) {
+      assert.ok(typeof message === "string" && message.trim() !== "", `${locale}.${key} is empty`);
+    }
+    assert.ok(messages.extName.message.length <= 75, `${locale} name is too long`);
+    assert.ok(messages.extDescription.message.length <= 132, `${locale} description is too long`);
+    assert.ok(["ltr", "rtl"].includes(messages.htmlDir.message), `${locale} htmlDir`);
   }
 });

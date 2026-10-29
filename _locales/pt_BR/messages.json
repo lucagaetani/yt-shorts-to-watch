@@ -1,0 +1,42 @@
+{
+  "extName": {
+    "message": "Alternador de Visualização para YouTube Shorts",
+    "description": "Extension name (Chrome Web Store, toolbar tooltip, popup title). Max 75 characters."
+  },
+  "extDescription": {
+    "message": "Os YouTube Shorts abrem como vídeos normais.",
+    "description": "Extension description in the Chrome Web Store. Max 132 characters."
+  },
+  "htmlLang": {
+    "message": "pt-BR",
+    "description": "BCP 47 language tag of this translation, used for the popup's lang attribute."
+  },
+  "htmlDir": {
+    "message": "ltr",
+    "description": "Text direction of this translation: ltr or rtl."
+  },
+  "loading": {
+    "message": "Carregando…",
+    "description": "Popup status while the saved setting is loading."
+  },
+  "statusEnabled": {
+    "message": "Esta extensão está funcionando. Todo YouTube Short abre instantaneamente como um vídeo normal do YouTube.",
+    "description": "Popup status when the switch is on."
+  },
+  "statusDisabled": {
+    "message": "Esta extensão não está funcionando no momento. Reative-a para abrir todo YouTube Short como um vídeo normal do YouTube.",
+    "description": "Popup status when the switch is off."
+  },
+  "switchLabel": {
+    "message": "Abrir Shorts na visualização normal de vídeo",
+    "description": "Screen-reader label of the on/off switch."
+  },
+  "saveError": {
+    "message": "Não foi possível salvar sua alteração. Tente novamente.",
+    "description": "Popup error when the setting could not be saved."
+  },
+  "loadError": {
+    "message": "Não foi possível carregar sua configuração. Feche e abra este pop-up novamente para tentar de novo.",
+    "description": "Popup error when the setting could not be loaded."
+  }
+}

@@ -25,4 +25,7 @@ The extension doesn't collect, store or send any personal data. The only thing i
 ## Development
 - Load the folder unpacked from `chrome://extensions` (Developer mode → Load unpacked).
 - Run the tests with Node.js 18 or newer: `node --test`
-- When packaging for the Chrome Web Store, zip only the runtime files: `manifest.json`, `background.js`, `content.js`, `shorts-url.js`, `rules.json`, `index.html`, `index.js`, `index.css`, `icons/`, and `LICENSE`.
+- When packaging for the Chrome Web Store, zip only the runtime files: `manifest.json`, `background.js`, `content.js`, `shorts-url.js`, `rules.json`, `index.html`, `index.js`, `index.css`, `_locales/`, `icons/`, and `LICENSE`.
+
+## Translations
+Available in English (default), French, German, Chinese (Simplified), Portuguese (Brazil), Arabic, Dutch, Italian and Polish. Each language has a `_locales/<locale>/messages.json` file; to add one, copy `_locales/en/messages.json` and translate every `message`. `htmlLang` and `htmlDir` set the popup's language and text direction.

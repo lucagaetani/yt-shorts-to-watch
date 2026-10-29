@@ -1,0 +1,42 @@
+{
+  "extName": {
+    "message": "YouTube Shorts 视图切换器",
+    "description": "Extension name (Chrome Web Store, toolbar tooltip, popup title). Max 75 characters."
+  },
+  "extDescription": {
+    "message": "以普通视频方式打开 YouTube Shorts。",
+    "description": "Extension description in the Chrome Web Store. Max 132 characters."
+  },
+  "htmlLang": {
+    "message": "zh-CN",
+    "description": "BCP 47 language tag of this translation, used for the popup's lang attribute."
+  },
+  "htmlDir": {
+    "message": "ltr",
+    "description": "Text direction of this translation: ltr or rtl."
+  },
+  "loading": {
+    "message": "正在加载…",
+    "description": "Popup status while the saved setting is loading."
+  },
+  "statusEnabled": {
+    "message": "此扩展程序正在运行。每个 YouTube Shorts 短视频都会立即以普通 YouTube 视频方式打开。",
+    "description": "Popup status when the switch is on."
+  },
+  "statusDisabled": {
+    "message": "此扩展程序当前未运行。重新启用后，每个 YouTube Shorts 短视频都将以普通 YouTube 视频方式打开。",
+    "description": "Popup status when the switch is off."
+  },
+  "switchLabel": {
+    "message": "以普通视频视图打开 Shorts",
+    "description": "Screen-reader label of the on/off switch."
+  },
+  "saveError": {
+    "message": "无法保存您的更改，请重试。",
+    "description": "Popup error when the setting could not be saved."
+  },
+  "loadError": {
+    "message": "无法加载您的设置。请关闭并重新打开此弹出窗口后重试。",
+    "description": "Popup error when the setting could not be loaded."
+  }
+}

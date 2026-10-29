@@ -1,0 +1,42 @@
+{
+  "extName": {
+    "message": "Przełącznik widoku dla YouTube Shorts",
+    "description": "Extension name (Chrome Web Store, toolbar tooltip, popup title). Max 75 characters."
+  },
+  "extDescription": {
+    "message": "Filmy YouTube Shorts otwierają się jako zwykłe filmy.",
+    "description": "Extension description in the Chrome Web Store. Max 132 characters."
+  },
+  "htmlLang": {
+    "message": "pl",
+    "description": "BCP 47 language tag of this translation, used for the popup's lang attribute."
+  },
+  "htmlDir": {
+    "message": "ltr",
+    "description": "Text direction of this translation: ltr or rtl."
+  },
+  "loading": {
+    "message": "Wczytywanie…",
+    "description": "Popup status while the saved setting is loading."
+  },
+  "statusEnabled": {
+    "message": "To rozszerzenie działa. Każdy film YouTube Shorts otwiera się od razu jako zwykły film w YouTube.",
+    "description": "Popup status when the switch is on."
+  },
+  "statusDisabled": {
+    "message": "To rozszerzenie jest obecnie wyłączone. Włącz je ponownie, aby otwierać każdy film YouTube Shorts jako zwykły film w YouTube.",
+    "description": "Popup status when the switch is off."
+  },
+  "switchLabel": {
+    "message": "Otwieraj Shorts w zwykłym widoku filmu",
+    "description": "Screen-reader label of the on/off switch."
+  },
+  "saveError": {
+    "message": "Nie udało się zapisać zmiany. Spróbuj ponownie.",
+    "description": "Popup error when the setting could not be saved."
+  },
+  "loadError": {
+    "message": "Nie udało się wczytać ustawienia. Zamknij i ponownie otwórz to okienko, aby spróbować jeszcze raz.",
+    "description": "Popup error when the setting could not be loaded."
+  }
+}

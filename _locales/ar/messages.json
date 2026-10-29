@@ -1,0 +1,42 @@
+{
+  "extName": {
+    "message": "مبدّل العرض لـ YouTube Shorts",
+    "description": "Extension name (Chrome Web Store, toolbar tooltip, popup title). Max 75 characters."
+  },
+  "extDescription": {
+    "message": "تُفتح مقاطع YouTube Shorts كفيديوهات عادية.",
+    "description": "Extension description in the Chrome Web Store. Max 132 characters."
+  },
+  "htmlLang": {
+    "message": "ar",
+    "description": "BCP 47 language tag of this translation, used for the popup's lang attribute."
+  },
+  "htmlDir": {
+    "message": "rtl",
+    "description": "Text direction of this translation: ltr or rtl."
+  },
+  "loading": {
+    "message": "جارٍ التحميل…",
+    "description": "Popup status while the saved setting is loading."
+  },
+  "statusEnabled": {
+    "message": "هذه الإضافة تعمل حاليًا. يُفتح كل مقطع YouTube Shorts فورًا كفيديو عادي على YouTube.",
+    "description": "Popup status when the switch is on."
+  },
+  "statusDisabled": {
+    "message": "هذه الإضافة لا تعمل حاليًا. أعِد تفعيلها لفتح كل مقطع YouTube Shorts كفيديو عادي على YouTube.",
+    "description": "Popup status when the switch is off."
+  },
+  "switchLabel": {
+    "message": "فتح مقاطع Shorts في عرض الفيديو العادي",
+    "description": "Screen-reader label of the on/off switch."
+  },
+  "saveError": {
+    "message": "تعذّر حفظ التغيير. يُرجى المحاولة مرة أخرى.",
+    "description": "Popup error when the setting could not be saved."
+  },
+  "loadError": {
+    "message": "تعذّر تحميل الإعداد. أغلق هذه النافذة وافتحها مرة أخرى للمحاولة من جديد.",
+    "description": "Popup error when the setting could not be loaded."
+  }
+}

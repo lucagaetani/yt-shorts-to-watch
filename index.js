@@ -1,11 +1,23 @@
+const t = (key) => chrome.i18n.getMessage(key);
+
+// Strings live in _locales/<locale>/messages.json; Chrome picks the browser's language
+// and falls back to English (default_locale). lang/dir come from the chosen translation.
+function localizePage() {
+  document.documentElement.lang = t("htmlLang");
+  document.documentElement.dir = t("htmlDir");
+  for (const element of document.querySelectorAll("[data-i18n]")) {
+    element.textContent = t(element.dataset.i18n);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const checkBox = document.getElementById("enabled");
   const description = document.getElementById("status");
 
+  localizePage();
+
   const updateDescription = (isEnabled) => {
-    const activatedText = "This extension is currently working. Every YouTube Short opens instantly as a normal YouTube video.";
-    const notActivatedText = "This extension is not currently working. Reactivate it to open every YouTube Shorts as a normal YouTube video.";
-    description.textContent = isEnabled ? activatedText : notActivatedText;
+    description.textContent = t(isEnabled ? "statusEnabled" : "statusDisabled");
   };
 
   // The service worker and content scripts react to this storage change
@@ -18,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
       console.error("View Switcher: could not save setting", error);
       checkBox.checked = !isEnabled;
-      description.textContent = "Your change could not be saved. Please try again.";
+      description.textContent = t("saveError");
     }
   });
 
@@ -29,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     checkBox.disabled = false;
   } catch (error) {
     console.error("View Switcher: could not load setting", error);
-    description.textContent = "Your setting could not be loaded. Close and reopen this popup to try again.";
+    description.textContent = t("loadError");
   } finally {
     // Force a style flush so the initial state is painted before transitions are re-enabled.
     void checkBox.offsetWidth;

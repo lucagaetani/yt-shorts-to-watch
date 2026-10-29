@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>View Switcher for YouTube Shorts</title>
+  <title data-i18n="extName">View Switcher for YouTube Shorts</title>
   <link rel="stylesheet" href="index.css">
 </head>
 <body class="is-loading">
-  <h1 class="title">View Switcher for YouTube Shorts</h1>
-  <p class="description" id="status" aria-live="polite">Loading…</p>
+  <h1 class="title" data-i18n="extName">View Switcher for YouTube Shorts</h1>
+  <p class="description" id="status" aria-live="polite" data-i18n="loading">Loading…</p>
   <div class="switcher">
     <label class="switch">
       <input type="checkbox" role="switch" id="enabled" aria-describedby="status" disabled>
       <span class="slider" aria-hidden="true"></span>
-      <span class="visually-hidden">Open Shorts in the normal video view</span>
+      <span class="visually-hidden" data-i18n="switchLabel">Open Shorts in the normal video view</span>
     </label>
   </div>
   <script src="index.js"></script>
