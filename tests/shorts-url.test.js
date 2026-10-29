@@ -104,7 +104,7 @@ test("every locale translates every message within Chrome's limits", () => {
   }
 
   const locales = fs.readdirSync(path.join(root, "_locales"));
-  assert.deepEqual(locales.sort(), ["ar", "de", "en", "fr", "it", "nl", "pl", "pt_BR", "zh_CN"]);
+  assert.deepEqual(locales.sort(), ["ar", "de", "en", "es", "fr", "it", "nl", "pl", "pt_BR", "zh_CN"]);
   for (const locale of locales) {
     const messages = readJson(`_locales/${locale}/messages.json`);
     assert.deepEqual(Object.keys(messages).sort(), defaultKeys, `${locale} keys`);

@@ -1,0 +1,38 @@
+{
+  "extDescription": {
+    "message": "Los YouTube Shorts se abren como vídeos normales.",
+    "description": "Extension description in the Chrome Web Store. Max 132 characters."
+  },
+  "htmlLang": {
+    "message": "es",
+    "description": "BCP 47 language tag of this translation, used for the popup's lang attribute."
+  },
+  "htmlDir": {
+    "message": "ltr",
+    "description": "Text direction of this translation: ltr or rtl."
+  },
+  "loading": {
+    "message": "Cargando…",
+    "description": "Popup status while the saved setting is loading."
+  },
+  "statusEnabled": {
+    "message": "Esta extensión está funcionando. Cada YouTube Short se abre al instante como un vídeo normal de YouTube.",
+    "description": "Popup status when the switch is on."
+  },
+  "statusDisabled": {
+    "message": "Esta extensión no está funcionando en este momento. Vuelve a activarla para abrir cada YouTube Short como un vídeo normal de YouTube.",
+    "description": "Popup status when the switch is off."
+  },
+  "switchLabel": {
+    "message": "Abrir los Shorts en la vista de vídeo normal",
+    "description": "Screen-reader label of the on/off switch."
+  },
+  "saveError": {
+    "message": "No se ha podido guardar el cambio. Inténtalo de nuevo.",
+    "description": "Popup error when the setting could not be saved."
+  },
+  "loadError": {
+    "message": "No se ha podido cargar la configuración. Cierra y vuelve a abrir esta ventana para intentarlo de nuevo.",
+    "description": "Popup error when the setting could not be loaded."
+  }
+}
